@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extCss %}
+    <link rel="stylesheet" href="{% static 'mine/css/mine.css' %}">
+{% endblock %}
+
+{% block content %}
+    <input type="file" onchange="upload(this.files[0])"
+           id="file" style="display: none">
+    <div id="mine">
+        <section class="fixed">
+            <span><img id="userImg" onclick="file.click()" src="{% static loginUser.imgPath %}"></span></span>
+            <p><a href="#">{{ loginUser.nickName }}</a></p>
+            <p><span class="glyphicon glyphicon-fire"></span><span>vip10 级</span></p>
+            <a href="/app/register" id="regis">注册</a>
+            <p><span class="glyphicon glyphicon-heart"></span>商品收藏</p>
+        </section>
+        <section class="my">
+            <p>
+                <span>我的订单</span><a href="#">查看全部订单></a>
+            </p>
+            <nav id="nav">
+                <ul>
+                    {% for nav in navs %}
+                        <li>
+                            <a href="{{ nav.url }}">
+                                <dl>
+                                    <dt><span class="{{ nav.icon }}"></span></dt>
+                                    <dd>{{ nav.name }}</dd>
+                                </dl>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <menu>
+                <ul>
+                    {% for menu in menus %}
+                        <li>
+                            <a href="{{ menu.url }}">
+                                <dl>
+                                    <dt><span class="{{ menu.icon }}"></span></dt>
+                                    <dd>{{ menu.name }}</dd>
+                                </dl>
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </menu>
+            <p>
+                <a href="/app/logout">退出当前账号</a>
+            </p>
+        </section>
+    </div>
+{% endblock %}
+{% block extjs %}
+    <script src="{% static 'mine/js/mine.js' %}"></script>
+{% endblock %}

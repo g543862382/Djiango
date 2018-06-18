@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extCss %}
+    <link rel="stylesheet" href="{% static 'mine/css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="register">
+    <a class="btn btn-default" href="#"><span class="glyphicon glyphicon-chevron-left"/><span>返回</span> </a>
+    <h3>用户注册</h3>
+    <form class="form-horizontal" method="post" action="/app/regist">
+        {% csrf_token %}
+        <div class="input-group">
+            <span class="input-group-addon">账号</span>
+            <input class="form-control" title="账号" name="username" placeholder="不能少于10个字符" >
+        </div>
+        <p class="error">用户名不能为空</p>
+        <div class="input-group">
+            <span class="input-group-addon">昵称</span>
+            <input class="form-control" title="昵称" name="nickname" placeholder="不能少于10个字符" >
+        </div>
+        <p class="error">昵称不能为空</p>
+        <div class="input-group">
+            <span class="input-group-addon">口令</span>
+            <input class="form-control" title="口令" name="passwd" type="password" placeholder="可能不能少于8个字符">
+        </div>
+        <p class="error">口令不能为空</p>
+        <div class="input-group">
+            <span class="input-group-addon">验证</span>
+            <input class="form-control" title="确认口令" name="passwd2" type="password"  placeholder="再一次输入口令">
+
+        </div>
+<p class="error">确认口令不能为空</p>
+        <div class="input-group">
+            <span class="input-group-addon">手机</span>
+            <input class="form-control" title="手机号" name="phone" placeholder="请输入您的手机号">
+            <span class="input-group-addon" id="sendSmcode">发送验证码</span>
+        </div>
+        <p class="error">手机号不能为空</p>
+        <div class="input-group">
+            <span class="input-group-addon">验证码</span>
+            <input class="form-control" title="验证码" name="smscode" placeholder="输入您收的短信验证码" style="width: 5rem">
+        </div>
+        <p class="error" >验证码不能为空</p>
+
+        <div class="input-group" style="margin: 0px auto;">
+            <button type="button" onclick="submitForm()" class="btn btn-success">注册</button>
+            <a class="btn btn-link" href="/app/login">已有用户登录</a>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
+{% block extJs %}
+    <script src="{% static 'mine/js/regist.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extCss %}
+    <link rel="stylesheet" href="{% static 'order/css/order.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="order">
+        <p>
+            <button id="backBtn" class="btn btn-xs">返回</button>
+        <div class="clearfix"></div>
+        </p>
+        <h3>{{ title }}</h3>
+        <div>
+            <section class="orderInfo">
+                <p><strong>订单金额：</strong><span>￥{{ order.orderPrice }}</span></p>
+                <p><strong>收货信息：</strong>
+                    <span>{{ order.orderAddress.address_detail }}</span>
+                    <span>{{ order.orderAdderss.name }}</span>
+                    <span>{{ order.oerderAdderss.phone }}</span>
+                </p>
+            </section>
+
+            <menu id="orderGoods">
+                <ul>
+                    {% for orderitem in order.ordergoods_set.all %}
+                        <li>
+                            <dl>
+                                <dt>
+                                    <img src="{{ orderitem.goods.productimg }}" alt="">
+                                </dt>
+                                <dd><span>{{ orderitem.goods.productname }}</span></dd>
+                            </dl>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </menu>
+            <div id='payBtnDiv' title="{{ order.orderNum }}">
+                <button class="btn btn-success">余款</button>
+                <button class="btn btn-info">支付宝</button>
+                <button class="btn btn-warning">微信</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <span id="payMsg">正在支付...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block extJs %}
+    <script src="{% static 'order/js/order.js' %}"></script>
+{% endblock %}
